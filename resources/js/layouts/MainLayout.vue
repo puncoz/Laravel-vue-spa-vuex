@@ -2,8 +2,6 @@
       <div class="main">
             <main-header/>
             <div class="container">
-            <span v-text="isLoggedIn ? 'LoggedIn' : 'Not logged In'"></span>
-                  
                   <slot/>
             </div>
       </div>
@@ -22,11 +20,9 @@ export default {
       isLoggedIn: "isLoggedIn"
     })
   },
-
   created() {
     this.setCurrentUserFromLocalStorage();
   },
-
   methods: {
     setCurrentUserFromLocalStorage() {
       this.$store.dispatch("global/fetchCurrentUserFromLocalstorage");

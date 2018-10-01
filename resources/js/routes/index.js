@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import { Home, Login, Register, Dashboard } from "../modules";
+import Store from "../stores/index";
 
 Vue.use(VueRouter);
 
@@ -22,7 +23,10 @@ const routes = [
     },
     {
         path: "/dashboard",
-        component: Dashboard
+        component: Dashboard,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 
