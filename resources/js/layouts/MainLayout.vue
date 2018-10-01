@@ -20,14 +20,8 @@ export default {
       isLoggedIn: "isLoggedIn"
     })
   },
-  created() {
-    this.setCurrentUserFromLocalStorage();
-  },
-  methods: {
-    setCurrentUserFromLocalStorage() {
-      this.$store.dispatch("global/fetchCurrentUserFromLocalstorage");
-    }
-  }
+  created() {},
+  methods: {}
 };
 </script>
 

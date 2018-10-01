@@ -1,5 +1,9 @@
 export default {
     isLoggedIn(state) {
-        return state.currentUser.token !== "";
+        if (state.currentUser === null) {
+            return false;
+        } else {
+            return state.currentUser.token !== "";
+        }
     }
 };

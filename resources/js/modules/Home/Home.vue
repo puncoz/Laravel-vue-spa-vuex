@@ -4,14 +4,25 @@
                   <card>
                         <template slot="title">All Users</template>
                         <template slot="body">
-                              <ul>
-                                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis fuga, deleniti id voluptatem temporibus consequuntur asperiores eius saepe soluta blanditiis nulla omnis itaque? Corrupti in excepturi esse officia ratione magni.</li>
-                                    <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut debitis saepe dicta ducimus ullam voluptatibus. Et, maiores soluta distinctio eum iusto, quod cumque neque nemo ratione ex nobis cupiditate harum!</li>
-                                    <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem illo maxime nobis sit iure ab reiciendis sed consectetur laboriosam blanditiis placeat distinctio adipisci in alias illum commodi, non, magni aspernatur!</li>
-                                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam doloribus eligendi eius in neque corporis quisquam repellat non porro necessitatibus quibusdam ipsum molestiae, amet ratione laborum assumenda illum at. Distinctio.</li>
-                                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed rem cupiditate vitae excepturi repellendus nisi consequatur? Suscipit laborum perspiciatis alias adipisci, soluta debitis voluptatibus aut similique id aliquid voluptas vel.</li>
-                                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde iusto asperiores nisi alias itaque, possimus minus ipsum enim molestiae doloribus, nobis illo et ipsam rem maiores accusantium cum, praesentium quod.</li>
-                              </ul>
+                              <table class="table table-borderless">
+                                    <thead>
+                                          <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr v-if="users.length == 0">
+                                                <td colspan="4" style="text-align: center">No data available</td>
+                                          </tr>
+                                          <tr v-for="(user, index) in users" :key="user.id" v-else>
+                                                <td>{{ index + 1 }}</td>
+                                                <td>{{ user.name }}</td>
+                                                <td>{{ user.email }}</td>
+                                          </tr>
+                                    </tbody>
+                              </table>
                         </template>
                   </card>
             </div>
@@ -21,12 +32,32 @@
 <script>
 import Card from "../../components/Card";
 import Container from "../../components/Container";
+import UserService from "../../services/UserService";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      users: []
+    };
+  },
   components: {
     Container,
     Card
+  },
+  created() {
+    this.getAllUsers();
+  },
+  methods: {
+    getAllUsers() {
+      UserService.getAllUsers()
+        .then(userList => {
+          this.users = userList;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 };
 </script>

@@ -90,10 +90,9 @@ export default {
       AuthService.register(this.user)
         .then(user => {
           this.user = {};
-          alert("user registered successfully");
+          this.$router.push("/login");
         })
         .catch(error => {
-          console.log(error);
           if (error.response.status === 422) {
             this.form.record(error.response.data.errors);
           }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/auth/login', 'Api\AuthController@login')->name('auth.login');
 Route::post('/auth/register', 'Api\AuthController@register')->name('auth.register');
+Route::get('/users/list', function () {
+    $users = app(User::class)->all();
+
+    return response()->json($users);
+})->name('users.list');

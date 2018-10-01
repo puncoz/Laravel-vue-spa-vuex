@@ -1,8 +1,3 @@
 export default {
-    currentUser: {
-        name: "",
-        email: "",
-        token: ""
-    },
-    isLoggedIn: false
+    currentUser: localStorage.getItem("currentUser") || null
 };
